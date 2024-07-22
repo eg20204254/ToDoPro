@@ -4,10 +4,8 @@ import 'package:flutter_application_1/Widgets/button.dart';
 import 'package:flutter_application_1/Widgets/inputField.dart';
 import 'package:flutter_application_1/bloc/taskBloc.dart';
 import 'package:flutter_application_1/bloc/taskEvent.dart';
-import 'package:flutter_application_1/controllers/TaskController.dart';
 import 'package:flutter_application_1/models/TaskModel.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
 
 class EditTaskPage extends StatefulWidget {
   final Task task;
@@ -20,26 +18,26 @@ class EditTaskPage extends StatefulWidget {
 
 class _EditTaskPageState extends State<EditTaskPage> {
   late TextEditingController _titleController;
-  late TextEditingController _noteController;
   final _formKey = GlobalKey<FormState>();
 
   late DateTime _selectedDate;
   late String _alertTime;
   late bool _isDone;
 
+  //final taskBloc = Get.find<TaskBloc>();
+
   @override
   void initState() {
     super.initState();
     _titleController = TextEditingController(text: widget.task.title);
     _alertTime = widget.task.alertAt;
-    //_selectedDate = widget.task.date; *******************************
+    //_selectedDate = widget.task.date;
     _isDone = widget.task.isDone;
   }
 
   @override
   void dispose() {
     _titleController.dispose();
-    _noteController.dispose();
     super.dispose();
   }
 
@@ -179,6 +177,7 @@ class _EditTaskPageState extends State<EditTaskPage> {
 
   void _updateTask() {
     Task updatedTask = Task(
+      id: widget.task.id,
       title: _titleController.text,
       //date: _selectedDate,
       alertAt: _alertTime,

@@ -36,6 +36,9 @@ class TaskApiService {
 
   Future<Task> updateTask(Task updatedTask) async {
     final String url = '$apiUrl/${updatedTask.id}';
+    print('Updating task with ID: ${updatedTask.id} at URL: $url');
+    print('Update task request body: ${jsonEncode(updatedTask.toJson())}');
+
     final response = await http.put(
       Uri.parse(url),
       headers: <String, String>{
@@ -43,10 +46,13 @@ class TaskApiService {
       },
       body: jsonEncode(updatedTask.toJson()),
     );
+    print('Update task response status: ${response.statusCode}');
+    print('Update task response body: ${response.body}');
 
     if (response.statusCode == 200) {
       return Task.fromJson(jsonDecode(response.body));
     } else {
+      print('Failed to update task: ${response.reasonPhrase}'); // Add this line
       throw Exception('Failed to update task');
     }
   }

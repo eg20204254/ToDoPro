@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Pages/allTaskspage.dart';
 import 'package:flutter_application_1/Pages/welcomePage.dart';
 import 'package:flutter_application_1/services/ApiService.dart';
 import 'package:flutter_application_1/bloc/taskBloc.dart';
@@ -13,12 +14,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'To-do App',
-      debugShowCheckedModeBanner: false,
-      home: BlocProvider(
-        create: (context) => TaskBloc(TaskApiService()),
-        child: WelcomePage(),
+    final _taskApiService = TaskApiService();
+
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<TaskBloc>(
+          create: (context) => TaskBloc(_taskApiService),
+        ),
+      ],
+      child: MaterialApp(
+        title: 'To-do App',
+        debugShowCheckedModeBanner: false,
+        home: WelcomePage(taskProvider: _taskApiService),
       ),
     );
   }

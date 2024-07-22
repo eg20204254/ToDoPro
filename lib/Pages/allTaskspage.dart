@@ -11,10 +11,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class AllTasksPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final TaskBloc taskBloc = BlocProvider.of<TaskBloc>(context);
-
+    // Load tasks when the page is first built
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      taskBloc.add(LoadTasks());
+      context.read<TaskBloc>().add(LoadTasks());
     });
 
     return Scaffold(

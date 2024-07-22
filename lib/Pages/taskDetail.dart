@@ -3,11 +3,9 @@ import 'package:flutter_application_1/Pages/allTaskspage.dart';
 import 'package:flutter_application_1/Pages/editTaskpage.dart';
 import 'package:flutter_application_1/bloc/taskBloc.dart';
 import 'package:flutter_application_1/bloc/taskEvent.dart';
-//import 'package:flutter_application_1/controllers/TaskController.dart';
 import 'package:flutter_application_1/models/TaskModel.dart';
 import 'package:flutter_application_1/themeData.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
 
 class TaskDetailPage extends StatelessWidget {
   final Task task;
@@ -17,8 +15,6 @@ class TaskDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //final TaskController taskController = Get.find<TaskController>();
-
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -199,7 +195,7 @@ class TaskDetailPage extends StatelessWidget {
     );
   }
 
-  void _deleteTask(BuildContext context) {
+  Future<void> _deleteTask(BuildContext context) async {
     context.read<TaskBloc>().add(DeleteTask(task.id!));
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -208,11 +204,12 @@ class TaskDetailPage extends StatelessWidget {
       ),
     );
 
-    Future.delayed(Duration(seconds: 1), () {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => AllTasksPage()),
-      );
-    });
+    /*Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => AllTasksPage()),
+    );*/
+    await Future.delayed(
+        Duration(milliseconds: 300)); // Optional: Adjust delay if needed
+    Navigator.pop(context);
   }
 }

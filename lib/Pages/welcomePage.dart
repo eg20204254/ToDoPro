@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/Pages/homepage.dart';
+import 'package:flutter_application_1/services/ApiService.dart';
 
 class WelcomePage extends StatelessWidget {
-  const WelcomePage({super.key});
+  /*const WelcomePage(Map<dynamic, TaskApiService> map,
+      {super.key, required TaskApiService taskProvider});*/
+  final TaskApiService taskProvider;
+
+  const WelcomePage({super.key, required this.taskProvider});
 
   @override
   Widget build(BuildContext context) {

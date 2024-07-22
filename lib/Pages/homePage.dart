@@ -7,11 +7,9 @@ import 'package:flutter_application_1/Widgets/button.dart';
 import 'package:flutter_application_1/Widgets/taskContainer.dart';
 import 'package:flutter_application_1/bloc/taskBloc.dart';
 import 'package:flutter_application_1/bloc/taskEvent.dart';
-import 'package:flutter_application_1/controllers/TaskController.dart';
 import 'package:flutter_application_1/services/ApiService.dart';
 import 'package:flutter_application_1/themeData.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_application_1/models/TaskModel.dart';
@@ -25,7 +23,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   DateTime _selectedDate = DateTime.now();
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -43,7 +40,6 @@ class _HomePageState extends State<HomePage> {
                 child: Center(
                   child: Image.asset(
                     'assets/w.png',
-                    //scale: 1,
                     width: 500,
                     height: 150,
                   ),
